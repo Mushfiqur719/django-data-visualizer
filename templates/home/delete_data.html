@@ -1,0 +1,32 @@
+{% load crispy_forms_tags %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <title>Delete Page</title>
+    </head>
+
+    <body>
+    <div class="container mb-3 mt-5">
+        <div class="card text-black border-primary">
+            <div class="card-header">
+                <strong>
+                    Delete Data
+                </strong>
+            </div>
+
+            <div class="card-body">
+                <h5>Are you sure you want to delete "{{ item }}?"</h5>
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <a class="btn btn-success" href="{% url 'home_page' %}">Cancel</a>
+                        <input class="btn btn-danger" type="submit" value = "Confirm">
+                    </form>
+            </div>
+</div>
+</div>
+
+    </body>
+</html>
