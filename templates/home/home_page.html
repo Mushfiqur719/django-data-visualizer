@@ -30,10 +30,10 @@
 
 
 <br>
-<!--        <form method="get">-->
-<!--            {{filter.form}}-->
-<!--            <button class="btn btn-primary" type="submit">Search</button>-->
-<!--        </form>-->
+        <form method="get">
+            {{filter.form}}
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
         <br>
 
 
@@ -71,12 +71,12 @@
 
     </table>
         <br>
-        {% if data.has_previous %}
-        <a class="btn btn-primary btn-sm" href="{% url 'home_page' %}?page={{data.previous_page_number}}">Previous Page</a>
-        {% endif %}
-        {% if data.has_next %}
-        <a class="btn btn-primary btn-sm" href="{% url 'home_page' %}?page={{data.next_page_number}}">Next Page</a>
-        {% endif %}
+<!--        {% if data.has_previous %}-->
+<!--        <a class="btn btn-primary btn-sm" href="{% url 'home_page' %}?page={{data.previous_page_number}}">Previous Page</a>-->
+<!--        {% endif %}-->
+<!--        {% if data.has_next %}-->
+<!--        <a class="btn btn-primary btn-sm" href="{% url 'home_page' %}?page={{data.next_page_number}}">Next Page</a>-->
+<!--        {% endif %}-->
 
     </div>
 </body>
