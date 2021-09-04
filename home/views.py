@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import StockMarket
 from .forms import DataForm
 from django.core.paginator import Paginator, EmptyPage
+from .filters import DataFilter
 
 # Function to load data from model StockMarket
 def homePage(request):
@@ -14,7 +15,14 @@ def homePage(request):
     except EmptyPage:
         page = p.page(1)
 
-    context = {'data': page}
+    # myFilter = DataFilter(request.GET,queryset=data)
+    # search = myFilter.qs
+
+    context = {
+        'data': page,
+        # 'filter':myFilter,
+        # 'search':search
+    }
     return render(request, 'home/home_page.html', context)
 
 # Adds new data to the database.
@@ -55,3 +63,5 @@ def deleteData(request, pk):
 
     value = {'item':data}
     return render(request, 'home/delete_data.html', value)
+
+
