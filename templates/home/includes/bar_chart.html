@@ -1,0 +1,32 @@
+
+<canvas id="barChart" width="200" height="100"></canvas>
+    <script>
+                        var ctx = document.getElementById('barChart').getContext('2d');
+                        var barChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: [{% for d in data %} '{{ d.trade_code }}', {% endfor %}],
+
+                                datasets: [{
+                                type: 'bar',
+                                    label: 'Amount of Volumes / 1000',
+                                    data: [{% for d in data %} {{ d.volume }}/1000, {% endfor %} ],
+                                    backgroundColor: [
+                                    <!-- red -->
+                                        'rgba(255, 99, 132)',
+                                    <!-- green -->
+                                        'rgba(75, 192, 192)',
+                                    ],
+                                },
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+

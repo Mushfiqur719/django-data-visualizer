@@ -1,19 +1,14 @@
+{% extends 'home/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
+{% block title %}
+    Visual Data
+{% endblock %}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>
-        Visual Data
-    </title>
-</head>
+{% block content %}
 
-<body>
-    <div class="container mb-3 mt-3">
-        <h1 style="text-align:center">
+<h1 style="text-align:center">
             Data Visualization app with Django
         </h1>
 
@@ -28,56 +23,93 @@
           </div>
         </div>
 
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-12 ">
+          <div class="card">
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs" id="data-visualization" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#data" role="tab" aria-controls="data" aria-selected="true">Data Table</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"  href="#bar" role="tab" aria-controls="bar" aria-selected="true">Bar Chart</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#mixed" role="tab" aria-controls="mixed" aria-selected="true">Mixed Chart</a>
+                </li>
+              </ul>
+            </div>
 
-<br>
-        <form method="get">
-            {{filter.form}}
-            <button class="btn btn-primary" type="submit">Search</button>
-        </form>
-        <br>
+            <div class="card-body">
+               <div class="tab-content mt-3">
 
+                   <!-- Data Table -->
+                <div class="tab-pane active" id="data" role="tabpanel">
+                    <h4 class="card-title">Data Table</h4>
 
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-              <th>Date</th>
-              <th>Trade Code</th>
-              <th>High</th>
-              <th>Low</th>
-              <th>Open</th>
-              <th>Close</th>
-              <th>Volume</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+                    <table id="table_id" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Trade Code</th>
+                                <th>High</th>
+                                <th>Low</th>
+                                <th>Open</th>
+                                <th>Close</th>
+                                <th>Volume</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        {% for d in data %}
+                        <tbody>
+                            <tr>
+                                <td>{{d.date}}</td>
+                                <td>{{ d.trade_code }}</td>
+                                <td>{{ d.high }}</td>
+                                <td>{{ d.low }}</td>
+                                <td>{{ d.open }}</td>
+                                <td>{{ d.close }}</td>
+                                <td>{{ d.volume }}</td>
+                                <td>
+                                    <a class="btn btn-success btn-sm" href="{% url 'add_data' d.id %}">Edit</a>
+                                    <a class="btn btn-danger btn-sm" href="{% url 'delete_data' d.id %}">Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
 
-        {% for k in data %}
-        <tbody>
-            <tr>
-                <td>{{k.date}}</td>
-                <td>{{ k.trade_code }}</td>
-                <td>{{ k.high }}</td>
-                <td>{{ k.low }}</td>
-                <td>{{ k.open }}</td>
-                <td>{{ k.close }}</td>
-                <td>{{ k.volume }}</td>
-                <td>
-                    <a class="btn btn-success btn-sm" href="{% url 'add_data' k.id %}">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="{% url 'delete_data' k.id %}">Delete</a>
-                </td>
-            </tr>
-        </tbody>
-        {% endfor %}
+                    <div>
+                        {% if data.has_previous %}
+                            <a class="btn btn-primary btn-sm" href="{% url 'home_page' %}?page={{data.previous_page_number}}">Previous Page</a>
+                        {% endif %}
+                        {% if data.has_next %}
+                            <a class="btn btn-primary btn-sm" href="{% url 'home_page' %}?page={{data.next_page_number}}">Next Page</a>
+                        {% endif %}
+                    </div>
+                </div>
+                   <!-- End of DataTable -->
 
-    </table>
-        <br>
-<!--        {% if data.has_previous %}-->
-<!--        <a class="btn btn-primary btn-sm" href="{% url 'home_page' %}?page={{data.previous_page_number}}">Previous Page</a>-->
-<!--        {% endif %}-->
-<!--        {% if data.has_next %}-->
-<!--        <a class="btn btn-primary btn-sm" href="{% url 'home_page' %}?page={{data.next_page_number}}">Next Page</a>-->
-<!--        {% endif %}-->
+                   <!-- Bar Chart -->
+                   <div class="tab-pane" id="bar" role="tabpanel" aria-labelledby="history-tab">
+                       <h4 class="card-title">Bar Chart</h4>
+                    {% include 'home/includes/bar_chart.html' %}
+                   </div>
+                   <!-- End of Bar Chart -->
 
+                   <!-- Mixed Chart -->
+                <div class="tab-pane" id="mixed" role="tabpanel" aria-labelledby="deals-tab">
+                    <h4 class="card-title">Mixed Chart</h4>
+                    {% include 'home/includes/mixed_chart.html' %}
+                </div>
+                   <!-- End of mixed chart -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
-</html>
+{% endblock %}
+

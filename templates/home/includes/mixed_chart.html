@@ -1,0 +1,67 @@
+
+<canvas id="mixedChart" width="200" height="100"></canvas>
+    <script>
+                        var ctx = document.getElementById('mixedChart').getContext('2d');
+                        var mixedChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: [{% for d in data %} '{{ d.date }}', {% endfor %}],
+
+                                datasets: [{
+                                type: 'bar',
+                                    label: 'Amount of Volumes / 10k',
+                                    data: [{% for d in data %} {{ d.volume }}/100000, {% endfor %} ],
+                                    backgroundColor: [
+                                    <!-- red -->
+                                        'rgba(255, 99, 132)',
+                                    <!-- green -->
+                                        'rgba(75, 192, 192)',
+                                    ],
+                                },
+                                {
+                                type: 'line',
+                                    label: 'high',
+                                    data: [{% for d in data %} {{ d.high }}, {% endfor %} ],
+                                    backgroundColor: [
+                                    <!-- blue -->
+                                        'rgba(54, 162, 235)',
+                                    ],
+                                },
+                                {
+                                type: 'line',
+                                    label: 'low',
+                                    data: [{% for d in data %} {{ d.low }}, {% endfor %} ],
+                                    backgroundColor: [
+                                    <!-- blue -->
+                                        'rgb(255, 159, 64)',
+                                    ],
+                                },
+                                {
+                                type: 'line',
+                                    label: 'open',
+                                    data: [{% for d in data %} {{ d.open }}, {% endfor %} ],
+                                    backgroundColor: [
+                                    <!-- blue -->
+                                        'rgb(255, 205, 86)',
+                                    ],
+                                },
+                                {
+                                type: 'line',
+                                    label: 'close',
+                                    data: [{% for d in data %} {{ d.close }}, {% endfor %} ],
+                                    backgroundColor: [
+                                        'rgb(153, 102, 255)',
+                                    ],
+                                },
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+

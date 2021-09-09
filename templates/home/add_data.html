@@ -1,17 +1,13 @@
+{% extends 'home/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% block title %}
+    Add Data
+{% endblock %}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>
-        Add Data
-    </title>
-</head>
-<body>
-
-<div class="container mb-3 mt-5">
+{% block content %}
+    <div class="container mb-3 mt-5">
     <div class="card text-black border-primary">
     <div class="card-header">
         <strong>
@@ -33,6 +29,4 @@
 </div>
 
 
-
-</body>
-</html>
+{% endblock %}

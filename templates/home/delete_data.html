@@ -1,12 +1,13 @@
+{% extends 'home/base.html' %}
 {% load crispy_forms_tags %}
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-        <title>Delete Page</title>
-    </head>
+{% load static %}
 
-    <body>
+{% block title %}
+    Add Data
+{% endblock %}
+
+{% block content %}
+
     <div class="container mb-3 mt-5">
         <div class="card text-black border-primary">
             <div class="card-header">
@@ -28,5 +29,4 @@
 </div>
 </div>
 
-    </body>
-</html>
+{% endblock %}
