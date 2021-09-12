@@ -7,20 +7,20 @@ from .filters import DataFilter
 # Function to load data from model StockMarket
 def homePage(request):
     data = StockMarket.objects.all()
-    p = Paginator(data,100)
-    page_num = request.GET.get('page',1)
+    # p = Paginator(data,100)
+    # page_num = request.GET.get('page',1)
+    #
+    # try:
+    #     page = p.page(page_num)
+    # except EmptyPage:
+    #     page = p.page(1)
 
-    try:
-        page = p.page(page_num)
-    except EmptyPage:
-        page = p.page(1)
-
-    # myFilter = DataFilter(request.GET,queryset=data)
-    # data = myFilter.qs
+    myFilter = DataFilter(request.GET,queryset=data)
+    data = myFilter.qs
 
     context = {
-        'data': page,
-        # 'filter': myFilter,
+        'data': data,
+        'filter': myFilter,
     }
     return render(request, 'home/home_page.html', context)
 
